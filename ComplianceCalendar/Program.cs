@@ -1,4 +1,4 @@
-using ComplianceCalendar.Data;
+﻿using ComplianceCalendar.Data;
 using ComplianceCalendar.Endpoints;
 using ComplianceCalendar.MappingConfig;
 using ComplianceCalendar.Repositories;
@@ -137,7 +137,7 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    app.UseCors("AllowAllOrigins")
+    app.UseCors("AllowAllOrigins");
 }
 
 // Configure the HTTP request pipeline.
