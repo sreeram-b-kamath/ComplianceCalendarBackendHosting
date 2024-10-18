@@ -120,9 +120,9 @@ builder.Services.AddHostedService<QuartzHostedService>();
 // Configure CORS policy for development
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("SpecificOrigin",
+    options.AddPolicy("AllowAllOrigins",
         builder => builder
-            .WithOrigins("https://compliance-calendar-hosting-kkph.vercel.app")
+            .AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
@@ -131,7 +131,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseCors("SpecificOrigin");
+    app.UseCors("AllowAllOrigins");
     app.UseSwagger();
     app.UseSwaggerUI();
 }
