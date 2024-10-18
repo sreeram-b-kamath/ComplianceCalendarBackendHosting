@@ -1,4 +1,4 @@
-﻿using ComplianceCalendar.Data;
+using ComplianceCalendar.Data;
 using ComplianceCalendar.Endpoints;
 using ComplianceCalendar.MappingConfig;
 using ComplianceCalendar.Repositories;
@@ -120,9 +120,9 @@ builder.Services.AddHostedService<QuartzHostedService>();
 // Configure CORS policy for development
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost",
+    options.AddPolicy("SpecificOrigin",
         builder => builder
-            ..WithOrigins("https://compliance-calendar-hosting-kkph.vercel.app")
+            .WithOrigins("https://compliance-calendar-hosting-kkph.vercel.app")
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
@@ -131,7 +131,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseCors("AllowLocalhost");
+    app.UseCors("SpecificOrigin");
     app.UseSwagger();
     app.UseSwaggerUI();
 }
