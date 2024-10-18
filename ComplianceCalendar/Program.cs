@@ -135,6 +135,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+else
+{
+    app.UseCors("AllowAllOrigins")
+}
 
 // Configure the HTTP request pipeline.
 app.MapDepartmentEndpoints();
