@@ -1,18 +1,19 @@
 # Use the official .NET SDK image to build the app
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 # Set the working directory inside the container
-WORKDIR /app
+WORKDIR /src
 
 # Copy the .csproj and restore any dependencies (via NuGet)
-COPY *.csproj ./
-RUN dotnet restore
+COPY ["ComplianceCalendar/ComplianceCalendar.csproj", "ComplianceCalendar/"]
 
+
+RUN dotnet restore "ComplianceCalendar/ComplianceCalendar.csproj"
 # Copy the rest of the application code
-COPY . ./
+COPY . .
 
 # Build the application
-RUN dotnet publish -c Release -o /out
+RUN dotnet publish "ComplianceCalendar/ComplianceCalendar.csproj" -c Release -o /app/publish
 
 # Use a runtime image for deployment
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
@@ -21,10 +22,10 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 
 # Copy the built application from the previous stage
-COPY --from=build /out .
+COPY --from=build /app/publish .
 
 # Expose the port that your application runs on
-EXPOSE 7013
+EXPOSE 80
 
 # Set the entry point to run your app
 ENTRYPOINT ["dotnet", "ComplianceCalendar.dll"]

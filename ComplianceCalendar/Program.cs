@@ -120,7 +120,7 @@ builder.Services.AddHostedService<QuartzHostedService>();
 // Configure CORS policy for development
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost",
+    options.AddPolicy("AllowAllOrigins",
         builder => builder
             .AllowAnyOrigin()
             .AllowAnyMethod()
@@ -131,9 +131,13 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseCors("AllowLocalhost");
+    app.UseCors("AllowAllOrigins");
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+else
+{
+    app.UseCors("AllowAllOrigins");
 }
 
 // Configure the HTTP request pipeline.
