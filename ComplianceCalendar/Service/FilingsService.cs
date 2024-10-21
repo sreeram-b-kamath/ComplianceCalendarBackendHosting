@@ -65,7 +65,7 @@ namespace ComplianceCalendar.Services
                     StatuteOrAct = addFilingsDTO.StatuteOrAct,
                     FormChallan = addFilingsDTO.FormChallan,
                     Particulars = addFilingsDTO.Particulars,
-                    DueDate = addFilingsDTO.DueDate.AddDays(1),
+                    DueDate = addFilingsDTO.DueDate,
                     DepName = addFilingsDTO.DepName,
                     CreatedById = addFilingsDTO.CreatedById,
                     CreatedDate = DateTime.UtcNow,
