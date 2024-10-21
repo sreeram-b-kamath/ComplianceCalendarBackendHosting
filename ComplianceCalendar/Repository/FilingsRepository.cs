@@ -232,7 +232,10 @@ namespace ComplianceCalendar.Repository
                     CreatedBy = uf.Filings.CreatedBy.EmpName,
                     AssignedTo = _context.UserFilings
                         .Where(innerUf => innerUf.FilingId == uf.FilingId)
-                        .Select(innerUf => innerUf.Employee.EmpName)
+                         .Select(innerUf => new
+                         {
+                             innerUf.Employee.EmpName
+                         })
                         .ToList()
                 })
                 .ToListAsync();
